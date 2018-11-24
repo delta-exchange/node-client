@@ -1,0 +1,16 @@
+{
+  "name": "delta-rest-client",
+  "version": "0.0.1",
+  "description": "Rest Client for Delta Exchange Apis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "author": "jitendra.jogeshwar@gmail.com,saurabh.goyal@delta.exchange",
+  "license": "",
+  "dependencies": {
+    "ramda": "^0.25.0",
+    "swagger-client": "^2.1.8"
+  }
+}
