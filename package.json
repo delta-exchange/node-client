@@ -11,6 +11,6 @@
   "license": "",
   "dependencies": {
     "ramda": "^0.25.0",
-    "swagger-client": "^2.1.8"
+    "swagger-client": "^3.10.5"
   }
 }

@@ -3,15 +3,21 @@ var SwaggerClient = require("swagger-client");
 var DeltaAPIKeyAuthorization = require("./lib/DeltaAPIKeyAuthorization");
 
 const DeltaRestClient = function(api_key, api_secret) {
-  return new SwaggerClient({
-    url: "https://docs.delta.exchange/api/swagger.json",
-    usePromise: true
-  })
+  const SWAGGER_URL = "http://localhost:8000/openapi.json";
+  const temp = new DeltaAPIKeyAuthorization(api_key, api_secret);
+  return new SwaggerClient(SWAGGER_URL, {
+      authorizations: {
+        'api-key': temp
+      }
+    })
     .then(function(client) {
-      client.clientAuthorizations.add(
-        "api-key",
-        new DeltaAPIKeyAuthorization(api_key, api_secret)
-      );
+
+      // console.log('1111 222 client: ', client)
+
+      // client.clientAuthorizations.add(
+      //   "api-key",
+      //   new DeltaAPIKeyAuthorization(api_key, api_secret)
+      // );
       return Promise.resolve(client);
     })
     .catch(function(e) {
