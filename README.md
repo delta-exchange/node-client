@@ -4,7 +4,7 @@ Delta Exchange is a crypto derivatives exchange where you can trade bitcoin, eth
 
 # Get started
 
-1. Create an account on https://trade.delta.exchange/signup
+1. Create an account on https://www.delta.exchange/app
 2. Generate your api key and api secret
 3. Install the package:
 
@@ -34,7 +34,7 @@ new DeltaRestClient(api_key, api_secret).then(client => {
   // Place new order
   client.apis.Orders.placeOrder({
     order: {
-      product_id: 3,
+      product_id: 13,
       size: 100,
       side: "sell",
       limit_price: "4400",
@@ -47,4 +47,4 @@ new DeltaRestClient(api_key, api_secret).then(client => {
 5. Checkout documentation & swagger file for all available operations
 
 - [Detailed Documentation](https://docs.delta.exchange)
-- [Swagger JSON](https://docs.delta.exchange/api/swagger.json)
+- [Swagger JSON](https://docs.delta.exchange/api/swagger_v2.json)
