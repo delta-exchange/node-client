@@ -18,13 +18,13 @@ npm install --save delta-rest-client
 const DeltaRestClient = require("delta-rest-client");
 new DeltaRestClient(api_key, api_secret).then(client => {
   // Get List of Products
-  client.Products.getProducts().then(function(response) {
+  client.apis.Products.getProducts().then(function(response) {
     var products = JSON.parse(response.data.toString());
     console.log("\nProducts:\n----\n", JSON.stringify(products));
   });
 
   // Get Open orders for product_id = 3
-  client.Orders.getOrders({ product_id: 3, state: "open" }).then(function(
+  client.apis.Orders.getOrders({ product_id: 3, state: "open" }).then(function(
     response
   ) {
     var orders = JSON.parse(response.data.toString());
@@ -32,7 +32,7 @@ new DeltaRestClient(api_key, api_secret).then(client => {
   });
 
   // Place new order
-  client.Orders.placeOrder({
+  client.apis.Orders.placeOrder({
     order: {
       product_id: 3,
       size: 100,
