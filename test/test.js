@@ -1,7 +1,7 @@
 const DeltaRestClient = require("../index");
 var DeltaAPIKeyAuthorization = require("./../lib/DeltaAPIKeyAuthorization");
-const api_key = "22226156f5621f06abacd60f6bed0411d7";
-const api_secret = "22220c90314ea3610ee398172b20e5b8a831c6e5f9925897f34b2bd45444882e";
+const api_key = "";
+const api_secret = "";
 
 function inspect(client) {
   console.log("Inspecting Delta API...");
@@ -17,12 +17,11 @@ function inspect(client) {
 }
 
 new DeltaRestClient(api_key, api_secret).then(client => {
-
   // to get products
   client.apis.Products.getProducts()
     .then(function(response) {
       // console.log("res products:");
-      console.log("Products.getProducts success: ");
+      console.log("Products.getProducts success: ", response.body);
     })
     .catch(function(e) {
       console.log("Error 111: ", e);
@@ -48,14 +47,14 @@ new DeltaRestClient(api_key, api_secret).then(client => {
   //   });
 
   // to get orders
-  // client.apis.Orders.getOrders({
-  //     page_size: 1
-  //   })
-  //   .then(function(response) {
-  //     console.log("Orders.getOrders success:");
-  //   }).catch(function(e) {
-  //     console.log("Error 111: ", e);
-  //   });
+  client.apis.Orders.getOrders({
+      page_size: 1
+  })
+  .then(function(response) {
+    console.log("Orders.getOrders success:", response.body);
+  }).catch(function(e) {
+    console.log("Error 111: ", e);
+  });
 
   // TO DO endpoint
 
@@ -76,9 +75,9 @@ new DeltaRestClient(api_key, api_secret).then(client => {
   //     console.log("Error 111: ", e);
   //   });
 
-  // client.apis.TradeHistory.getUserFillsByFilters()
+  // client.apis.TradeHistory.getUserfills()
   //   .then(function(response) {
-  //     console.log("TradeHistory.getUserFillsByFilters success: ");
+  //     console.log("TradeHistory.getUserfills success: ", response.body);
   //   }).catch(function(e) {
   //     console.log("Error 111: ", e);
   //   });
@@ -115,7 +114,7 @@ new DeltaRestClient(api_key, api_secret).then(client => {
 
   // client.apis.Wallet.getBalances()
   //   .then(function(response) {
-  //     console.log("Wallet.getBalances success: ");
+  //     console.log("Wallet.getBalances success: ", response.body);
   //   }).catch(function(e) {
   //     console.log("Error 111: ", e);
   //   });
@@ -141,13 +140,21 @@ new DeltaRestClient(api_key, api_secret).then(client => {
   //     console.log("Error 111: ", e);
   //   });
 
-  // // to get orders
-  // client.apis.Orders.placeOrder({})
-  //   .then(function(response) {
-  //     console.log("Orders.placeOrder success:");
-  //   }).catch(function(e) {
-  //     console.log("Error 111: ", e);
-  //   });
+  // // placing orders
+  // client.apis.Orders.placeOrder({
+  //   order: {
+  //     product_id: 13,
+  //     size: 100,
+  //     side: "buy",
+  //     limit_price: "7000",
+  //     order_type: "limit_order"
+  //   }
+  // })
+  // .then(function(response) {
+  //   console.log("Orders.placeOrder success:", response);
+  // }).catch(function(e) {
+  //   console.log("Error 111: ", e);
+  // });
 
 
 
