@@ -1,7 +1,7 @@
 const DeltaRestClient = require("../index");
-
-const api_key = "---";
-const api_secret = "---";
+var DeltaAPIKeyAuthorization = require("./../lib/DeltaAPIKeyAuthorization");
+const api_key = "";
+const api_secret = "";
 
 function inspect(client) {
   console.log("Inspecting Delta API...");
@@ -17,50 +17,145 @@ function inspect(client) {
 }
 
 new DeltaRestClient(api_key, api_secret).then(client => {
-  // Inspect Client
-  inspect(client.apis);
-
-  // Get products
-  client.Products.getProducts()
+  // to get products
+  client.apis.Products.getProducts()
     .then(function(response) {
-      var products = JSON.parse(response.data.toString());
-      console.log("\nProducts:\n----\n", JSON.stringify(products));
+      // console.log("res products:");
+      console.log("Products.getProducts success: ", response.body);
     })
     .catch(function(e) {
-      // Error handling...
-      console.log("Error:", e.statusText);
+      console.log("Error 111: ", e);
     });
+      
+  // client.apis.Positions.changePositionMargin({
+  //     "product_id": 7,
+  //     "delta_margin": 1.2
+  //   })
+  //   .then(function(response) {
+  //     console.log("Positions.changePositionMargin success: ", response);
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
 
-  // Get open orders
-  client.Orders.getOrders({ product_id: 3, state: "open" })
-    .then(function(response) {
-      var orders = JSON.parse(response.data.toString());
-      console.log("Open Orders:", orders);
-    })
-    .catch(function(e) {
-      // Error handling...
-      console.log("Error:", e.statusText);
-    });
+  // // get wallet balance
+  // client.apis.Assets.getAssets()
+  //   .then(function(response) {
+  //     console.log("Assets.getAssets success:");
+  //   })
+  //   .catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
 
-  // Place new order
-  // client.Orders.placeOrder({
+  // to get orders
+  client.apis.Orders.getOrders({
+      page_size: 1
+  })
+  .then(function(response) {
+    console.log("Orders.getOrders success:", response.body);
+  }).catch(function(e) {
+    console.log("Error 111: ", e);
+  });
+
+  // TO DO endpoint
+
+  // client.apis.Orders.getOrderLeverage({
+  //     product_id: 2
+  //   })
+  //   .then(function(response) {
+  //     console.log("Orders.getOrderLeverage success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+
+  // client.apis.TradeHistory.getOrderHistory()
+  //   .then(function(response) {
+  //     console.log("Orders.getOrders success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // client.apis.TradeHistory.getUserfills()
+  //   .then(function(response) {
+  //     console.log("TradeHistory.getUserfills success: ", response.body);
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // client.apis.TradeHistory.downloadFillsHistory()
+  //   .then(function(response) {
+  //     console.log("TradeHistory.downloadFillsHistory success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+
+  // to get positions
+  // NOTE working: error from TE(might be data issue)
+  // client.apis.Positions.getPositions({
+  //     product_ids: "7"
+  //   })
+  //   .then(function(response) {
+  //     console.log("Positions.getPositions success: ", response.data);
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // TO DO pending
+  // client.apis.Orderbook.getL2Orderbook({
+  //     product_id: 2
+  //   })
+  //   .then(function(response) {
+  //     console.log("TradeHistory.getUserFillsByFilters success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+
+  // client.apis.Wallet.getBalances()
+  //   .then(function(response) {
+  //     console.log("Wallet.getBalances success: ", response.body);
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // client.apis.Wallet.getTransactions()
+  //   .then(function(response) {
+  //     console.log("Wallet.getTransactions success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // client.apis.Wallet.downloadTransactions()
+  //   .then(function(response) {
+  //     console.log("Wallet.downloadTransactions success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // client.apis.SpotIndice.getSpotIndices()
+  //   .then(function(response) {
+  //     console.log("SpotIndice.getSpotIndices success: ");
+  //   }).catch(function(e) {
+  //     console.log("Error 111: ", e);
+  //   });
+
+  // // placing orders
+  // client.apis.Orders.placeOrder({
   //   order: {
-  //     product_id: 3,
-  //     size: 1,
-  //     side: "sell",
-  //     limit_price: "4400",
+  //     product_id: 13,
+  //     size: 100,
+  //     side: "buy",
+  //     limit_price: "7000",
   //     order_type: "limit_order"
   //   }
-  // }).then(response => console.log(JSON.parse(response.data.toString())));
+  // })
+  // .then(function(response) {
+  //   console.log("Orders.placeOrder success:", response);
+  // }).catch(function(e) {
+  //   console.log("Error 111: ", e);
+  // });
 
-  // Get Wallet Balances
-  client.Wallet.getWalletBalances()
-    .then(function(response) {
-      var balances = JSON.parse(response.data.toString());
-      console.log("\nWallet Balances:", balances);
-    })
-    .catch(function(e) {
-      // Error handling...
-      console.log("Error:", e.statusText);
-    });
+
+
 });

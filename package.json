@@ -1,6 +1,6 @@
 {
   "name": "delta-rest-client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Rest Client for Delta Exchange Apis",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,6 @@
   "license": "",
   "dependencies": {
     "ramda": "^0.25.0",
-    "swagger-client": "^2.1.8"
+    "swagger-client": "^3.10.5"
   }
 }
